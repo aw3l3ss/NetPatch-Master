@@ -1,8 +1,8 @@
 # NetPatch-Master
-## Network-Wide Patch Management System
+Network-Wide Patch Management System
 
 ## Overview 
-The Network-Wide Patch Management System is a comprehensive solution designed to automate the entire lifecycle of patch management across multiple servers within an organization. This Windows Forms application aims to simplify the process of ensuring that all servers are up-to-date with the latest security patches and software updates, thereby minimizing vulnerabilities and ensuring compliance with security standards. 
+The Network-Wide Patch Management System is a comprehensive solution designed to automate the entire lifecycle of patch management across multiple servers within an organization. This application aims to simplify the process of ensuring that all servers are up-to-date with the latest security patches and software updates, thereby minimizing vulnerabilities and ensuring compliance with security standards.
  
 ## Key Features 
 1. Automated Patch Discovery: The system continuously monitors for new patches and updates relevant to the software and operating systems running on the network's servers. It uses various sources, including official vendor sites and security bulletins, to ensure comprehensive coverage. 

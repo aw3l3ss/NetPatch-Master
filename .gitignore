@@ -110,3 +110,6 @@ bb.out.*
 # Ignore all local history of files
 .history
 .ionide
+
+# Binary files
+*.bin

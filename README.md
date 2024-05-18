@@ -13,4 +13,3 @@ The Network-Wide Patch Management System is a comprehensive solution designed to
 6. Custom Patch Policies: Administrators can define custom patch policies, specifying which types of patches (security, software updates, critical updates) are automatically approved for deployment and which require manual approval. 
 7. Notification and Alerts: The system sends real-time notifications and alerts to administrators about critical patches, patch deployment progress, and any issues encountered during the patch management process. 
 8. User-Friendly Dashboard: A central dashboard provides a comprehensive overview of the patch management process, including patch availability, deployment status, compliance levels, and historical analytics on patching activities.
-

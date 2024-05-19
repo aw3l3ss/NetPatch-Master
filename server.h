@@ -1,7 +1,7 @@
 #ifndef SERVER_H
 #define SERVER_H
 
-#include <libssh/libssh.h>
+#include "libssh/libssh.h"
 
 class Server {
     private:

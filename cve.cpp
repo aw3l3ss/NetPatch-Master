@@ -34,7 +34,7 @@ std::string Cve::get_cvss2() {
 std::vector<Cve> parse_cve(AptPackage apt_package) {
     std::vector<Cve> cves;
 
-    std::vector<std::string> lines = execute_python_script("cve_parser.py", "-c " + apt_package.get_name() + " -v " + apt_package.get_version());
+    std::vector<std::string> lines = execute_python_script("../python_modules/cve_parser.py", "-c " + apt_package.get_name() + " -v " + apt_package.get_version());
 
     int i = 0;
     int k = 0;

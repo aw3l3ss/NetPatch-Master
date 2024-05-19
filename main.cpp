@@ -1,16 +1,23 @@
 #include <iostream>
 
+#include "glad/glad.h"
+#include "GLFW/glfw3.h"
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
+
 #include "server.h"
 #include "cve.h"
 #include "apt_package.h"
 
 int main() {
+    /*
     Server server("92.38.255.48", "root", "2guGa0&D%1w3", 22);
     server.connect();
-    server.execute_command("apt list --installed", "test.bin");
+    server.execute_command("apt list --installed", "../test.bin");
     server.disconnect();
 
-    std::vector<AptPackage> apt_packages = get_packages("test.bin");
+    std::vector<AptPackage> apt_packages = get_packages("../test.bin");
 
     int cve_counter = 0;
     
@@ -33,6 +40,9 @@ int main() {
     }
 
     std::cout << "Total count of CVEs: " << cve_counter << std::endl;
+    */
+
+    
 
     return 0;
 }

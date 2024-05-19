@@ -3,6 +3,7 @@
 
 #include "apt_package.h"
 #include <string>
+#include <vector>
 
 class Cve {
     private:
@@ -20,5 +21,7 @@ class Cve {
         std::string get_cvss3();
         std::string get_cvss2();
 };
+
+std::vector<Cve> parse_cve(AptPackage apt_package);
 
 #endif 

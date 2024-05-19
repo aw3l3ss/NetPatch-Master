@@ -14,7 +14,11 @@ def find_cpe(component, version):
 
     cpe_matches = re.findall(r'cpe:(.*?)<', content)
 
-    return cpe_matches[0]
+    if (len(cpe_matches)):
+        return cpe_matches[0]
+    
+    else:
+        return None
 
 def find_cve(vendor, product, version):
     base_url = "https://nvd.nist.gov/vuln/search/results"

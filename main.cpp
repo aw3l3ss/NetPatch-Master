@@ -10,39 +10,47 @@
 #include "cve.h"
 #include "apt_package.h"
 
+void glfw_error_callback(int error, const char* description);
+
 int main() {
-    /*
-    Server server("92.38.255.48", "root", "2guGa0&D%1w3", 22);
-    server.connect();
-    server.execute_command("apt list --installed", "../test.bin");
-    server.disconnect();
+    glfwSetErrorCallback(glfw_error_callback);
 
-    std::vector<AptPackage> apt_packages = get_packages("../test.bin");
-
-    int cve_counter = 0;
-    
-    for (int i = 0; i < apt_packages.size(); i++) {
-        std::vector<Cve> cves = parse_cve(apt_packages[i]);
-
-        if (cves.size()) {
-            std::cout << apt_packages[i].get_name() << " " << apt_packages[i].get_version() << std::endl;
-            for (int j = 0; j < cves.size(); j++) {
-                std::cout << cves[j].get_id() << std::endl 
-                          << " CVSS 4.0: " << cves[j].get_cvss4() << std::endl
-                          << " CVSS 3.1: " << cves[j].get_cvss3() << std::endl
-                          << " CVSS 2.0: " << cves[j].get_cvss2() << std::endl << std::endl;
-            }
-
-            cve_counter += cves.size();
-
-            std::cout << std::endl << std::endl;
-        }
+    if (!glfwInit()) {
+        return -1;
     }
 
-    std::cout << "Total count of CVEs: " << cve_counter << std::endl;
-    */
+    const char* glsl_version = "#version 330";
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_DECORATED, GLFW_TRUE);
+
+    GLFWwindow* window = glfwCreateWindow(1280, 720, "ImGui + GLFW Example", NULL, NULL);
+    if (window == NULL) {
+        glfwTerminate();
+        return -1;
+    }
+    glfwMakeContextCurrent(window);
+    glfwSwapInterval(1);
+
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+        std::cerr << "Failed to initialize OpenGL loader!" << std::endl;
+        return -1;
+    }
+
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGui::StyleColorsDark();
+
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init(glsl_version);
 
     
 
     return 0;
+}
+
+void glfw_error_callback(int error, const char* description) {
+    std::cerr << "GLFW Error " << error << ": " << description << std::endl;
 }

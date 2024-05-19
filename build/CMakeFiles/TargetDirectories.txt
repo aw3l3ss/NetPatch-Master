@@ -1,3 +1,0 @@
-/mnt/c/GitHub/NetPatch-Master/build/CMakeFiles/NetPatch-Master.dir
-/mnt/c/GitHub/NetPatch-Master/build/CMakeFiles/edit_cache.dir
-/mnt/c/GitHub/NetPatch-Master/build/CMakeFiles/rebuild_cache.dir

@@ -5,17 +5,20 @@
 
 class Server {
     private:
-        const char *hostname;
-        const char *username;
-        const char *password;
+        char name[128];
+        char hostname[128];
+        char username[128];
+        char password[128];
         int ssh_port; 
         ssh_session session;
         
     public:
-        Server(const char *hostname = "127.0.0.1", const char *username = "root", const char *password = "root", int ssh_port = 22);
+        Server(char name[128], char hostname[128], char username[128], char password[128], int ssh_port);
         bool connect();
         void disconnect();
         bool execute_command(const char* command, const char* filename);
+        const char* get_name();
+        const char* get_hostname();
 };
 
 #endif 

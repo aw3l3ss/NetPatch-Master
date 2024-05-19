@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(NetPatch-Master)
+project(NetPatch-Master.o)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -10,9 +10,9 @@ file(GLOB IMGUI_SOURCES
     "${CMAKE_SOURCE_DIR}/imgui/backends/imgui_impl_opengl3.cpp"
 )
 
-add_executable(NetPatch-Master main.cpp apt_package.cpp cve.cpp python_api.cpp server.cpp glad/src/glad.c ${IMGUI_SOURCES})
+add_executable(NetPatch-Master.o main.cpp apt_package.cpp cve.cpp python_api.cpp server.cpp glad/src/glad.c ${IMGUI_SOURCES})
 
-target_include_directories(NetPatch-Master PRIVATE
+target_include_directories(NetPatch-Master.o PRIVATE
     ${CMAKE_SOURCE_DIR}/imgui
     ${CMAKE_SOURCE_DIR}/imgui/backends
     ${CMAKE_SOURCE_DIR}/glad/include
@@ -21,6 +21,6 @@ target_include_directories(NetPatch-Master PRIVATE
 )
 
 find_package(glfw3 3.3 REQUIRED)
-target_link_libraries(NetPatch-Master PRIVATE glfw GLU)
+target_link_libraries(NetPatch-Master.o PRIVATE glfw GLU)
 
-target_link_libraries(NetPatch-Master PRIVATE ssh)
+target_link_libraries(NetPatch-Master.o PRIVATE ssh)

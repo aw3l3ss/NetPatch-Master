@@ -1,11 +1,13 @@
 #include <iostream>
 #include <stdio.h>
+#include <cstring>
 #include "server.h"
 
-Server::Server(const char *hostname, const char *username, const char *password, int ssh_port) {
-    this->hostname = hostname;
-    this->username = username;
-    this->password = password;
+Server::Server(char name[128], char hostname[128], char username[128], char password[128], int ssh_port) {
+    strcpy(this->name, name);
+    strcpy(this->hostname, hostname);
+    strcpy(this->username, username);
+    strcpy(this->password,  password);
     this->ssh_port = ssh_port;
 
     session = ssh_new();
@@ -89,4 +91,12 @@ bool Server::execute_command(const char* command, const char* filename) {
     ssh_channel_free(channel);
 
     return true;
+}
+
+const char *Server::get_name() {
+    return name;
+}
+
+const char *Server::get_hostname() {
+    return hostname;
 }

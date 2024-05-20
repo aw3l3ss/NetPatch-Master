@@ -116,7 +116,13 @@ int main() {
         }
 
         ImGui::SameLine(93);
-        ImGui::Button("Delete Server");
+        if (ImGui::Button("Delete Server")) {
+            if (b_servers != -1) {
+                delete_server("../NetPatch.db", servers[b_servers]);
+                servers.erase(servers.begin() + b_servers);
+                b_servers = -1;
+            }
+        }
 
         ImGui::Separator();
 
@@ -166,7 +172,32 @@ void server_details(Server server) {
     ImGui::Text(server.get_name());
     ImGui::NextColumn();
     ImGui::SetColumnOffset(1, ImGui::GetIO().DisplaySize.x - 250);
-    ImGui::Button("Scan Now");
+
+    if (ImGui::Button("Scan Now")) {
+        std::string name = server.get_name();
+        std::string hostname = server.get_hostname();
+        std::string binfilename = "../" + name + hostname + ".bin";
+        server.connect();
+        server.execute_command("apt list --installed", binfilename.c_str());
+        server.disconnect();
+
+        std::cout << "[LOG] Apt list parse complete" << std::endl;
+
+        clear_cves("../NetPatch.db");
+
+        std::vector<AptPackage> apt_packages = get_packages(binfilename.c_str());
+
+        for (int i = 0; i < apt_packages.size(); i++) {
+            std::vector<Cve> cves = parse_cve(apt_packages[i]);
+
+            for (int j = 0; j < cves.size(); j++) {
+                std::cout << "[LOG] Found " << cves[j].get_id() << std::endl;
+                add_cve("../NetPatch.db", server, cves[j]);
+            }
+        }
+
+        std::cout << "[LOG] Scan complete" << std::endl;
+    }
 
     ImGui::Columns(1);
 
@@ -179,12 +210,24 @@ void server_details(Server server) {
     ImGui::Spacing();
     ImGui::Text("Vulnerabilities");
 
-    ImGui::BeginChild("Vulnerabilities List", ImVec2(0, ImGui::GetIO().DisplaySize.y - 200), true);
+    ImGui::BeginChild("Vulnerabilities List", ImVec2(0, ImGui::GetIO().DisplaySize.y - 200), ImGuiChildFlags_None, ImGuiWindowFlags_AlwaysHorizontalScrollbar | ImGuiWindowFlags_AlwaysVerticalScrollbar);
 
-    ImGui::Text("Critical Vulnerability 1");
-    ImGui::Text("A description of the critical vulnerability and its potential impact.");
+    std::vector<Cve> cves = get_cves("../NetPatch.db", server);
 
-    ImGui::Separator();
+    for (int i = 0; i < cves.size(); ++i) {
+        ImGui::Text(cves[i].get_id().c_str());
+        ImGui::Text(cves[i].get_summary().c_str());
+        ImGui::Text("CVSS 4.0: ");
+        ImGui::SameLine();
+        ImGui::Text(cves[i].get_cvss4().c_str());
+        ImGui::Text("CVSS 3.1: ");
+        ImGui::SameLine();
+        ImGui::Text(cves[i].get_cvss3().c_str());
+        ImGui::Text("CVSS 2.0: ");
+        ImGui::SameLine();
+        ImGui::Text(cves[i].get_cvss2().c_str());
+        ImGui::Separator();
+    }
 
     ImGui::EndChild();
 

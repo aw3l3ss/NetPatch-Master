@@ -23,7 +23,7 @@ make
 
 I don't recommend to launch the project not in the build directory, because it could work incorrect!
 
-## libraries used
+## Libraries used
 ```
 libssh
 glad

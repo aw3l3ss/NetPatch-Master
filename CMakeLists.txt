@@ -10,7 +10,7 @@ file(GLOB IMGUI_SOURCES
     "${CMAKE_SOURCE_DIR}/imgui/backends/imgui_impl_opengl3.cpp"
 )
 
-add_executable(NetPatch-Master.o main.cpp apt_package.cpp cve.cpp python_api.cpp server.cpp glad/src/glad.c ${IMGUI_SOURCES})
+add_executable(NetPatch-Master.o main.cpp sqlite3/sqlite3.c db.cpp apt_package.cpp cve.cpp python_api.cpp server.cpp glad/src/glad.c ${IMGUI_SOURCES})
 
 target_include_directories(NetPatch-Master.o PRIVATE
     ${CMAKE_SOURCE_DIR}/imgui

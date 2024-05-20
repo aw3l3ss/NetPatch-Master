@@ -130,3 +130,5 @@ _deps
 ### CMake Patch ###
 # External projects
 *-prefix/
+
+imgui.ini

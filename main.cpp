@@ -9,6 +9,7 @@
 #include "server.h"
 #include "cve.h"
 #include "apt_package.h"
+#include "db.h"
 
 void glfw_error_callback(int error, const char* description);
 void server_details(Server server);
@@ -47,6 +48,8 @@ int main() {
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init(glsl_version);
 
+    create_db("../NetPatch.db");
+
     bool b_add_server = false;
     int b_servers = -1;
 
@@ -56,7 +59,7 @@ int main() {
     char password[128];
     char port_b[6];
 
-    std::vector<Server> servers;
+    std::vector<Server> servers = get_servers("../NetPatch.db");
 
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
@@ -97,7 +100,7 @@ int main() {
                 int port = 0;
 
                 while (port_b[i] != '\0') {
-                    port = (port + port_b[i]) * 10;
+                    port = (port + (port_b[i] - '0')) * 10;
                     ++i;
                 }
 
@@ -105,6 +108,8 @@ int main() {
 
                 Server server(name, hostname, username, password, port);
                 servers.push_back(server);
+
+                add_server("../NetPatch.db", name, hostname, username, password, port);
             }
 
             ImGui::End();

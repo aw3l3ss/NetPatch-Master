@@ -17,7 +17,7 @@ cd NetPatch-Master
 mkdir build
 cd build
 sudo apt install libglu-dev
-sudo apt install libglfw-dev
+sudo apt install libglfw3-dev
 sudo apt install libssh-dev
 cmake ..
 make

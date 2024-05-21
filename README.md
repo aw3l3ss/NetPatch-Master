@@ -34,3 +34,6 @@ glfw
 imgui
 sqlite3
 ```
+
+## Video demonstration 
+https://youtu.be/xjgNP08-kNU?si=ihEyEPQXyPCbbUxT

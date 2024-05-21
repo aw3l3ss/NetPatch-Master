@@ -16,6 +16,9 @@ git clone https://github.com/aw3l3ss/NetPatch-Master.git
 cd NetPatch-Master
 mkdir build
 cd build
+sudo apt install libglu-dev
+sudo apt install libglfw-dev
+sudo apt install libssh-dev
 cmake ..
 make
 ./NetPatch-Master.o

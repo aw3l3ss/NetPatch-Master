@@ -4,6 +4,8 @@ project(NetPatch-Master.o)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
+
 file(GLOB IMGUI_SOURCES
     "${CMAKE_SOURCE_DIR}/imgui/*.cpp"
     "${CMAKE_SOURCE_DIR}/imgui/backends/imgui_impl_glfw.cpp"
@@ -21,6 +23,4 @@ target_include_directories(NetPatch-Master.o PRIVATE
 )
 
 find_package(glfw3 3.3 REQUIRED)
-target_link_libraries(NetPatch-Master.o PRIVATE glfw GLU)
-
-target_link_libraries(NetPatch-Master.o PRIVATE ssh)
+target_link_libraries(NetPatch-Master.o PRIVATE glfw GLU ssh ${CMAKE_DL_LIBS})
